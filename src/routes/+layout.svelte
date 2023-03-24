@@ -3,7 +3,7 @@
 </script>
 
 
-<Navbar />
+
 <div class="main-app">
     <slot></slot>
 </div>

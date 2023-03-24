@@ -1,4 +1,5 @@
 import type {Actions, RequestEvent,ActionFailure} from '@sveltejs/kit'
+import { fail } from '@sveltejs/kit';
 
 
 // can add RequestEvent to request {}:RequestEvent 
@@ -6,13 +7,27 @@ import type {Actions, RequestEvent,ActionFailure} from '@sveltejs/kit'
 
 //then add Promise to function type
 export const actions = {
-    act: async({request}): Promise<Response>=>{
+    act: async({request}): Promise<any>=>{
         const data = await request.formData();
-        console.log("Action!");
 
-        if(data.value) return  new Response(JSON.stringify({ type: 'failure', status: 200, data: {}}))
+        const firstname = data.get('firstname');
+        const lastname = data.get('lastname');
+        const age = data.get('age')
+        console.log("Action!",data);
 
-        return new Response()
+        if(age === 'oldaf')return fail(400,{
+            tooOld:true,
+            firstname,
+            lastname,
+        }) 
+
+        if(firstname === 'dave')return fail(400,{
+            firstname,
+            lastname,
+            age
+        })  
+
+        return  { type: 'success', status: 200, data: {prop:data.firstname}}
     },
 
 }
