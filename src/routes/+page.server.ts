@@ -27,7 +27,7 @@ export const actions = {
             age
         })  
 
-        return  { type: 'success', status: 200, data: {prop:data.firstname}}
+        return  { type: 'success', status: 200, data: firstname}
     },
 
 }
@@ -35,5 +35,7 @@ export const actions = {
 
 interface myData {
     firstName:string,
-    lastName:string
+    lastName:string,
+    age: number|string,
+
 }
